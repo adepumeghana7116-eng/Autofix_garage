@@ -1,0 +1,182 @@
+{
+  "info": {
+    "name": "AutoFix Garage API",
+    "description": "Requests for mechanics, bays, assignments, bay search, join endpoint and status workflow.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    }
+  ],
+  "item": [
+    {
+      "name": "1 - Add mechanic",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Ravi Kumar\",\n  \"specialization\": \"Engine repair\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "{{baseUrl}}/mechanics"
+      }
+    },
+    {
+      "name": "2 - Add bay",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Bay A\",\n  \"vehicle\": \"Car\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "{{baseUrl}}/bays"
+      }
+    },
+    {
+      "name": "3 - Get all bays",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/bays"
+      }
+    },
+    {
+      "name": "4 - Search bays by vehicle",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/bays?vehicle=car"
+      }
+    },
+    {
+      "name": "5 - Get one bay",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/bays/1"
+      }
+    },
+    {
+      "name": "6 - Update bay",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Bay A Updated\",\n  \"vehicle\": \"SUV\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "{{baseUrl}}/bays/1"
+      }
+    },
+    {
+      "name": "7 - Create assignment (pending, expect 201)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"mechanic_id\": 1,\n  \"bay_id\": 1,\n  \"job_description\": \"Brake inspection\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "{{baseUrl}}/assignments"
+      }
+    },
+    {
+      "name": "8 - Pending to approved (expect 200)",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"approved\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "{{baseUrl}}/assignments/1/status"
+      }
+    },
+    {
+      "name": "9 - Approved back to pending (expect 400)",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"pending\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "{{baseUrl}}/assignments/1/status"
+      }
+    },
+    {
+      "name": "10 - Join assignments with names",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/assignments"
+      }
+    },
+    {
+      "name": "11 - Delete bay",
+      "request": {
+        "method": "DELETE",
+        "url": "{{baseUrl}}/bays/1"
+      }
+    }
+  ]
+}
