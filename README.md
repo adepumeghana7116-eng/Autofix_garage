@@ -1,5 +1,9 @@
 # AutoFix Garage – Service Bay Management System
 
+## GIT HUB REPO
+
+[AutoFix Garage GitHub Repository](https://github.com/adepumeghana7116-eng/Autofix_garage.git)
+
 ## 1. Project Introduction
 
 AutoFix Garage is a Service Bay Management System developed using Node.js, Express.js and SQLite.
